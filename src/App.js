@@ -4,22 +4,39 @@ import './App.css';
 import { exchangeRateInEuro } from './exchange-rate.js';
 
 //components
-import SelectBox from './components/SelectBox.js';
+import LeftSelectBox from './components/LeftSelectBox.js';
+import RightSelectBox from './components/RightSelectBox.js';
 import Divider from './components/Divider.js';
 
 class App extends Component {
   state={
     exchangeRate : exchangeRateInEuro,
+    leftperRate : 0,
+    RightperRate : 0,
   }
 
-  render() {
+  leftSelectValueChange = (value) => {
+    this.setState({
+      leftperRate : value,
+    })
+  }
+
+  render(){
     return (
       <div className="container">
         <h1>Currency Converter</h1>
         <form>
-          <SelectBox ratesInEuro={ this.state.exchangeRate }/>
+          <LeftSelectBox 
+          ratesInEuro={ this.state.exchangeRate }
+          selectValueChange={this.selectValueChange}
+          perRate={this.state.perRate}/>
+
           <Divider />
-          <SelectBox ratesInEuro={ this.state.exchangeRate }/>
+
+          <RightSelectBox 
+          ratesInEuro={ this.state.exchangeRate }
+          selectValueChange={this.selectValueChange}
+          perRate={this.state.perRate}/>
         </form>
       </div>
     );

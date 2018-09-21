@@ -6,20 +6,25 @@ import Select from './Select.js'
 import Input from './Input.js'
 
 
-const SelectBox = (props) => {
-	return(
-		<div className="card-container">
-     <p className="per-rate">1USD=GBP</p>
-     <div  className="card">
-        <Select rates={props.ratesInEuro}/>
-        <Input />
-     </div>
-		</div>
-	);
+class LeftSelectBox extends Component {
+	render(){
+    return(
+      <div className="card-container">
+       <p className="per-rate">{props.perRate}</p>
+       <div  className="card">
+          <Select rates={props.ratesInEuro}/>
+          <Input />
+       </div>
+      </div>
+   );
+  }
 }
 
-SelectBox.propTypes={
+LeftSelectBox.propTypes={
   ratesInEuro : PropTypes.array.isRequired,
+  perRate: PropTypes.number.isRequired,
+  selectValueChange: PropTypes.func.isRequired,
+
 };
 
-export default SelectBox ;
+export default LeftSelectBox ;
