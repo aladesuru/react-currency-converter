@@ -9,7 +9,7 @@ class LeftSelectBox extends Component {
     amountToConvert : 0,
   };
 
-  componentDidMount =() => {
+  componentDidMount = () => {
     this.setState({
       rate_from: this.selectValue.name,
     })

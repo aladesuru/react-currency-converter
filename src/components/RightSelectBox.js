@@ -8,15 +8,11 @@ class RightSelectBox extends Component {
     rate_from: '',
     rate_to : 0,
     amountToConvert : 0,
-  }
-
-  componentDidMount = () => {
-    this.selectChange();
-  }
+  };
 
   selectChange = () => {
     this.props.onSelectChange(this.selectValue.value);
-  }
+  };
 
 
 	render(){
@@ -35,7 +31,7 @@ class RightSelectBox extends Component {
        </div>
       </div>
    );
-  }
+  };
 }
 
 RightSelectBox.propTypes={

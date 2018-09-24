@@ -15,17 +15,17 @@ class App extends Component {
   }
 
   componentDidMount =() =>{
-    this.onSelectChange()
+    
   }
 
   onSelectChange = (value) => {
     this.setState({
-      rateTo : value,
+      rateTo : Number(value),
     })
-    console.log(value)
   }
 
   render(){
+    console.log(this.state.rateTo)
     return (
       <div className="container">
         <h1>Currency Converter</h1>
