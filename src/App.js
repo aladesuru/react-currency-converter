@@ -11,14 +11,18 @@ import Divider from './components/Divider.js';
 class App extends Component {
   state={
     exchangeRate : exchangeRateInEuro,
-    leftRate : 0,
-    RightRate : 0,
+    rateTo: 0,
   }
 
-  leftSelectValueChange = (value) => {
+  componentDidMount =() =>{
+    this.onSelectChange()
+  }
+
+  onSelectChange = (value) => {
     this.setState({
-      leftRate : value,
+      rateTo : value,
     })
+    console.log(value)
   }
 
   render(){
@@ -28,13 +32,13 @@ class App extends Component {
         <form>
           <LeftSelectBox 
           ratesInEuro={ this.state.exchangeRate }
-          RightRate={this.state.RightRate}/>
+          rateTo={this.state.rateTo}/>
 
           <Divider />
 
           <RightSelectBox 
           ratesInEuro={ this.state.exchangeRate }
-          leftRate={this.state.leftRate}/>
+          onSelectChange={this.onSelectChange}/>
         </form>
       </div>
     );
