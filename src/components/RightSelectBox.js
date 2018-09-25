@@ -10,15 +10,20 @@ class RightSelectBox extends Component {
     amountToConvert : 0,
   };
 
-  selectChange = () => {
-    this.props.onSelectChange(this.selectValue.value);
+  componentWillMount = () =>{
+    this.rate_from='USD';
+  };
+
+  selectChange = (e) => {
+    this.rate_from = e.target.options[e.target.selectedIndex].innerHTML
+    this.props.onSelectChange(this.selectValue.value , this.rate_from);
   };
 
 
 	render(){
     return(
       <div className="card-container"> 
-       <p className="per-rate"></p>
+       <p className="per-rate">{`1 ${this.rate_from} = ${this.props.rightRateTo} ${this.props.leftSelectBoxLabel}`}</p>
        <div  className="card">
           <select onChange={this.selectChange} ref={(select) => this.selectValue = select } name='USD'>
             {
@@ -36,7 +41,9 @@ class RightSelectBox extends Component {
 
 RightSelectBox.propTypes={
   ratesInEuro : PropTypes.array.isRequired,
-  onSelectChange: PropTypes.func.isRequired
+  onSelectChange: PropTypes.func.isRequired,
+  rightRateTo : PropTypes.number.isRequired,
+  leftSelectBoxLabel : PropTypes.string.isRequired,
 };
 
 export default RightSelectBox ;

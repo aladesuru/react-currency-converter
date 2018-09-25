@@ -11,34 +11,53 @@ import Divider from './components/Divider.js';
 class App extends Component {
   state={
     exchangeRate : exchangeRateInEuro,
-    rateTo: 0,
-  }
+    leftRateTo: 0,
+    rightSelectBoxLabel : '',
+    rightRateTo : 0,
+    leftSelectBoxLabel : '',
+
+  };
 
   componentDidMount =() =>{
     
-  }
+  };
 
-  onSelectChange = (value) => {
+  onSelectChange = (convertToValue , labelFortheSelect) => {
     this.setState({
-      rateTo : Number(value),
+      leftRateTo : Number(convertToValue),
+      rightSelectBoxLabel: '',
     })
-  }
+  };
+
+   leftSelectChange = (convertToValue , labelFortheSelect) => {
+    this.setState({
+      rightRateTo : Number(convertToValue),
+      leftSelectBoxLabel: labelFortheSelect,
+    })
+  };
+
 
   render(){
-    console.log(this.state.rateTo)
+    console.log(this.state.leftRateTo)
     return (
       <div className="container">
         <h1>Currency Converter</h1>
         <form>
           <LeftSelectBox 
           ratesInEuro={ this.state.exchangeRate }
-          rateTo={this.state.rateTo}/>
+          leftRateTo={this.state.leftRateTo}
+          rightSelectBoxLabel={this.state.rightSelectBoxLabel}
+          leftSelectChange={this.leftSelectChange}
+         />
 
           <Divider />
 
           <RightSelectBox 
           ratesInEuro={ this.state.exchangeRate }
-          onSelectChange={this.onSelectChange}/>
+          onSelectChange={this.onSelectChange}
+          rightRateTo={this.state.rightRateTo}
+          leftSelectBoxLabel={this.state.leftSelectBoxLabel}
+          />
         </form>
       </div>
     );

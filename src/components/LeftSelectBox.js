@@ -1,7 +1,6 @@
 import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 
-
 class LeftSelectBox extends Component {
 
   state ={
@@ -9,23 +8,19 @@ class LeftSelectBox extends Component {
     amountToConvert : 0,
   };
 
-  componentDidMount = () => {
-    this.setState({
-      rate_from: this.selectValue.name,
-    })
+   componentWillMount = () => {
+    this.labelforselect='USD';
   };
 
   onSelectChangeValue = (e) => {
-    this.setState({
-      rate_from: e.target.options[e.target.selectedIndex].text
-    })
+    this.labelforselect = e.target.options[e.target.selectedIndex].innerHTML
+    this.props.leftSelectChange(this.selectValue.value , this.labelforselect);
   };
-
 
 	render(){
     return(
       <div className="card-container"> 
-       <p className="per-rate">{`1 ${this.state.rate_from} = ${this.props.rateTo}` }</p>
+       <p className="per-rate">{`1 ${this.labelforselect} = ${this.props.leftRateTo} ${this.props.rightSelectBoxLabel}` }</p>
        <div  className="card">
           <select ref={(select) => this.selectValue = select }  onChange={this.onSelectChangeValue} name='USD'>
             {
@@ -49,7 +44,9 @@ class LeftSelectBox extends Component {
 
 LeftSelectBox.propTypes={
   ratesInEuro : PropTypes.array.isRequired,
-  rateTo : PropTypes.number.isRequired,
+  leftRateTo : PropTypes.number.isRequired,
+  rightSelectBoxLabel: PropTypes.string.isRequired,
+  leftSelectChange : PropTypes.func.isRequired,
 };
 
 export default LeftSelectBox ;
