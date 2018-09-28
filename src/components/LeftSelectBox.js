@@ -4,25 +4,35 @@ import PropTypes from 'prop-types';
 class LeftSelectBox extends Component {
 
   state ={
-    rate_from: 0,
+    leftRateTo: 0,
     amountToConvert : 0,
   };
 
-   componentWillMount = () => {
+   componentWillMount() {
     this.labelforselect='USD';
   };
 
   onSelectChangeValue = (e) => {
     this.labelforselect = e.target.options[e.target.selectedIndex].innerHTML
     this.props.leftSelectChange(this.selectValue.value , this.labelforselect);
+    this.InputChange();
   };
+
+  // onInputChange = () => {
+  //   console.log(this.inputValue.value);
+  //   console.log(this.selectValue.value);
+  //   console.log(this.props.leftRateTo);
+
+  //   this.valueForRightInput = (this.inputValue.value/this.selectValue.value * this.props.leftRateTo)
+  //   this.props.InputChange(this.valueForRightInput);
+  // }
 
 	render(){
     return(
       <div className="card-container"> 
        <p className="per-rate">{`1 ${this.labelforselect} = ${this.props.leftRateTo} ${this.props.rightSelectBoxLabel}` }</p>
        <div  className="card">
-          <select ref={(select) => this.selectValue = select }  onChange={this.onSelectChangeValue} name='USD'>
+          <select id='hello' ref={(select) => this.selectValue = select }  onChange={this.onSelectChangeValue} name='USD'>
             {
               this.props.ratesInEuro.map((rates , index) => {
                 return <option
@@ -35,7 +45,9 @@ class LeftSelectBox extends Component {
               })
             }
           </select>
-          <input type="text" placeholder="type amount to convert here" ref={(input) => this.inputValue = input }/>
+          <input type="text" placeholder="type amount to convert here" 
+                  ref={(input) => this.inputValue = input }
+                 />
        </div>
       </div>
    );

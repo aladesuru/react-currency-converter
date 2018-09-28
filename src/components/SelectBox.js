@@ -1,30 +1,31 @@
-import React from 'react';
+import React , { Component } from 'react';
 import PropTypes from 'prop-types';
 
-// components
-import Select from './Select.js'
-import Input from './Input.js'
-
-
-class LeftSelectBox extends Component {
+class SelectBox extends Component {
 	render(){
     return(
-      <div className="card-container">
-       <p className="per-rate">{props.perRate}</p>
+      <div className="card-container"> 
+       <p className="per-rate"></p>
        <div  className="card">
-          <Select rates={props.ratesInEuro}/>
-          <Input />
+          <select  ref={(select) => this.selectValue = select }>
+            {
+              this.props.ratesInEuro.map((rates , index) => {
+                return <option value={rates.rate} key={index}> {rates.currency} </option>
+              })
+            }
+          </select>
+          <input type="text" 
+                  placeholder="type amount to convert here" 
+                  ref={(input) => this.inputValue = input }
+                  />
        </div>
       </div>
    );
-  }
+  };
 }
 
-LeftSelectBox.propTypes={
-  ratesInEuro : PropTypes.array.isRequired,
-  perRate: PropTypes.number.isRequired,
-  selectValueChange: PropTypes.func.isRequired,
-
+SelectBox.propTypes={
+  ratesInEuro : PropTypes.array.isRequired, 
 };
 
-export default LeftSelectBox ;
+export default SelectBox ;

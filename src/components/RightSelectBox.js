@@ -10,13 +10,13 @@ class RightSelectBox extends Component {
     amountToConvert : 0,
   };
 
-  componentWillMount = () =>{
-    this.rate_from='USD';
+  componentWillMount(){
+    this.rate_from ='USD';
   };
 
   selectChange = (e) => {
     this.rate_from = e.target.options[e.target.selectedIndex].innerHTML
-    this.props.onSelectChange(this.selectValue.value , this.rate_from);
+    this.props.rightSelectChange(this.selectValue.value , this.rate_from);
   };
 
 
@@ -32,7 +32,10 @@ class RightSelectBox extends Component {
               })
             }
           </select>
-          <input type="text" placeholder="type amount to convert here" ref={(input) => this.inputValue = input }/>
+          <input type="text" 
+                  placeholder="type amount to convert here" 
+                  ref={(input) => this.inputValue = input }
+                  />
        </div>
       </div>
    );
@@ -41,7 +44,7 @@ class RightSelectBox extends Component {
 
 RightSelectBox.propTypes={
   ratesInEuro : PropTypes.array.isRequired,
-  onSelectChange: PropTypes.func.isRequired,
+  rightSelectChange: PropTypes.func.isRequired,
   rightRateTo : PropTypes.number.isRequired,
   leftSelectBoxLabel : PropTypes.string.isRequired,
 };
