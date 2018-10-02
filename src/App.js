@@ -21,23 +21,18 @@ class App extends Component {
      return Number(1/euroExchangeRatecurrencyFrom * euroExchangeRatecurrencyTo).toFixed(4)
   };
 
-componentDidMount(){
+componentDidMount = () => {
   this.setState({
     leftRateTo : this.perCrossCurrency(this.leftselectValue.value , this.rightselectValue.value),
     rightRateTo : this.perCrossCurrency(this.rightselectValue.value , this.leftselectValue.value),
   });
-
-  // this.state.leftRateTo = this.perCrossCurrency(this.leftselectValue.value , this.rightselectValue.value)
-  // this.state.rightRateTo = this.perCrossCurrency(this.rightselectValue.value , this.leftselectValue.value)
-
-  console.log(this.state.leftRateTo);
+  console.log(this.state);
   console.log(this.state.rightRateTo);
 };
 
  
-
   InputValueIs = (elementValue , rate) => {
-    return elementValue * rate; 
+    return Number(elementValue * rate).toFixed(2); 
   };
  
  rightSelectChange = (e) => {
@@ -54,28 +49,21 @@ componentDidMount(){
       leftRateTo : this.perCrossCurrency(e.target.value , this.rightselectValue.value),
       rightRateTo : this.perCrossCurrency(this.rightselectValue.value , e.target.value),
     })
+
+    this.rightInputValue.value = "";
+    this.leftInputValue.value = "";
   };
 
 
   leftInputChange = (e) => {
-    this.setState({
-      leftRateTo : this.perCrossCurrency(Number(this.leftselectValue.value) , Number(this.rightselectValue.value)),
-    })
-
-    this.rightInputValue.value = Number(this.InputValueIs(e.target.value , this.state.leftRateTo).toFixed(2));
-     console.log(this.state.leftRateTo);
-     console.log(this.leftInputValue.value);
+    this.rightInputValue.value = this.InputValueIs(e.target.value , this.state.leftRateTo);
   };
 
   rightInputchange = (e) => {
-    // this.setState({
-    //   valueForRightInput : Number(e.target.value),
-    //   valueForleftInput : Number(this.InputValueIs(this.rightInputValue.value , this.state.rightRateTo)).toFixed(2),
-    // })
+   this.leftInputValue.value = this.InputValueIs(e.target.value , this.state.rightRateTo);
   };
 
   
-
   render(){
     return (
       <div className="container">
