@@ -10,16 +10,14 @@ export class Provider extends Component{
     leftCountry : 'USD',
     rightCountry : 'USD',
     leftCurrencyRate : 1,
-    rightCurrencyRate : 1,  
-    leftInput : 0,
-    rightInput: 0,  
-    totalAmount : 0,   
+    rightCurrencyRate : 1,
   };
 
-
-  liftUpSelectBoxValues = (value) => {
-    console.log('is me')
-    this.setState({rightCurrencyRate : value})
+ getSelectBoxValues = (value1 , value2) => {
+    this.setState(
+      {leftCurrencyRate : parseFloat(value1 / value2).toFixed(4),
+        rightCurrencyRate : parseFloat(value2 / value1).toFixed(4),
+      })
   };
 
 /*
@@ -27,9 +25,6 @@ export class Provider extends Component{
 */
 
   changeCountryOnSelectBoxChange = (leftOptText , rightOptText) => {
-      console.log(leftOptText , 'left box change');
-      console.log(rightOptText , 'right box change');
-
         var elId = 0;
       for (var i = 0; i < this.state.exchangeRate.length ; i++) {
         if (leftOptText && (parseFloat(this.state.exchangeRate[i].currency) ===  parseFloat(leftOptText))) {
@@ -40,50 +35,18 @@ export class Provider extends Component{
       }
 
       if (leftOptText) { 
-        this.setState(() => {
-          console.log(this.state.exchangeRate[elId].country);
+        this.setState((prevState) => {
           return {
-            leftCountry : this.state.exchangeRate[elId].country,
+            leftCountry : prevState.exchangeRate[elId].country,
           }
         })
       } else if(rightOptText) {
-        this.setState(() => {
-          console.log(this.state.exchangeRate[elId].country);
+        this.setState((prevState) => {
           return {
-            rightCountry : this.state.exchangeRate[elId].country,
+            rightCountry : prevState.exchangeRate[elId].country,
           }
         })
       }
-  };
-
-/*
-  * crossConversion method  
-*/
-  crossConversion = (selectboxValueInEuro , inputValue) => {
-    return Number((1 / selectboxValueInEuro) * inputValue).toFixed(4);
-  }
-
-/*
-  * OnInputChange method is use for conversion  
-*/
-
-  onInputChange = (leftSelectboxValueInEuro , rightSelectboxValueInEuro , inputValue) => {
-    if (leftSelectboxValueInEuro) {
-
-        this.setState(() => {
-          return {
-            totalAmount : this.crossConversion(leftSelectboxValueInEuro , inputValue)
-          }
-        });
-
-    }else if (rightSelectboxValueInEuro) {
-      this.setState(() => {
-          return {
-            totalAmount : this.crossConversion(rightSelectboxValueInEuro , inputValue)
-          }
-        });
-    }
-
   };
 
   render(){
@@ -94,13 +57,12 @@ export class Provider extends Component{
           rightCountry : this.state.rightCountry,
           leftCurrency : this.state.leftCurrencyRate,
           rightCurrency : this.state.rightCurrencyRate,
-          leftInput : this.leftInput,
-          rightInput : this.rightInput,
-          totalAmount : this.totalAmount,
+          leftInput : this.state.leftInput,
+          rightInput : this.state.rightInput,
 
           actions: {
             SelectBoxChange : this.changeCountryOnSelectBoxChange,
-            liftUpSelectBoxValues : this.liftUpSelectBoxValues,
+            liftUpSelectBoxValues : this.getSelectBoxValues,
           },
         }}>
 
