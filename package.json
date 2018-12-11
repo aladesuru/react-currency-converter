@@ -2,6 +2,7 @@
   "name": "react_currency_converter",
   "version": "0.1.0",
   "private": true,
+  "homepage":"https://aladesuru.github.io/react-currency-converter",
   "dependencies": {
     "proptypes": "^1.1.0",
     "react": "^16.5.2",
@@ -12,6 +13,7 @@
     "gh-pages": "^2.0.1"
   },
   "scripts": {
+    "deploy": "yarn build && gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

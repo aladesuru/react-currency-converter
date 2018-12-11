@@ -9,16 +9,57 @@ export class Provider extends Component{
     exchangeRate : exchangeRateInEuro,
     leftCountry : 'USD',
     rightCountry : 'USD',
-    leftCurrencyRate : 1,
-    rightCurrencyRate : 1,
+    leftCurrencyCrossRate : 1,
+    leftInputValue : "",
+    rightCurrencyCrossRate : 1,
+    // rightInputValue : 0,
   };
 
+/*
+  * method that gets select box values to determine cross rate
+*/
  getSelectBoxValue = (leftSelectboxValue , rightSelectBoxValue) => {
-    this.setState(
-      {leftCurrencyRate : parseFloat(leftSelectboxValue / rightSelectBoxValue).toFixed(4),
-        rightCurrencyRate : parseFloat(rightSelectBoxValue / leftSelectboxValue).toFixed(4),
-      })
+    // console.log("leftSelectboxValue :" , leftSelectboxValue);
+    // console.log("rightSelectBoxValue :" , rightSelectBoxValue);
+    this.setState((prevState) => {
+        return  {leftCurrencyCrossRate : parseFloat(leftSelectboxValue / rightSelectBoxValue).toFixed(4),
+          rightCurrencyCrossRate : parseFloat(rightSelectBoxValue / leftSelectboxValue).toFixed(4),
+        }
+      }
+     )
+    
+    // console.log("leftCurrencyCrossRate" , this.state.leftCurrencyCrossRate);
+    // console.log("rightCurrencyCrossRate" , this.state.rightCurrencyCrossRate);
   };
+
+/*
+  * cross coversion methods  
+*/
+
+  leftInputChange = (leftInputValue , rightInputElement) => {
+    console.log("leftInputValue is :" , leftInputValue)
+    // console.log(this.state.leftCurrencyCrossRate)
+    // console.log("rightInputElement is :" , rightInputElement)
+
+    if (!isNaN(leftInputValue) && leftInputValue !== "") {
+          rightInputElement.value = Number(this.state.leftCurrencyCrossRate * leftInputValue).toFixed(2)
+    }else {
+        rightInputElement.value = ""
+    } 
+
+    // console.log(leftInputValue);
+ };
+
+ // rightInputChange = (rightInputValue) => {
+ //    if (!isNaN(rightInputValue) && rightInputValue !== "") {
+ //        this.setState({
+ //        leftInputValue : Number(this.state.rightCurrencyCrossRate * rightInputValue).toFixed(2)
+ //      })
+ //    } 
+ //    else {
+ //      this.setState({leftInputValue: ""})
+ //    }
+ // };
 
 /*
   * changeCountryOnSelectBoxChange method is use to change both select box label  
@@ -55,14 +96,18 @@ export class Provider extends Component{
           exchangeRateInEuro : this.state.exchangeRate,
           leftCountry : this.state.leftCountry,
           rightCountry : this.state.rightCountry,
-          leftCurrency : this.state.leftCurrencyRate,
-          rightCurrency : this.state.rightCurrencyRate,
-          leftInput : this.state.leftInput,
-          rightInput : this.state.rightInput,
+          leftCurrency : this.state.leftCurrencyCrossRate,
+          rightCurrency : this.state.rightCurrencyCrossRate,
+          // leftInput : this.state.leftInput,
+          // rightInput : this.state.rightInput,
+          // rightInputValue : this.state.rightInputValue,
+          // leftInputValue :this.state.leftInputValue,
 
           actions: {
             SelectBoxChange : this.changeCountryOnSelectBoxChange,
             getSelectBoxValue : this.getSelectBoxValue,
+            leftInputChange : this.leftInputChange,
+            rightInputChange : this.rightInputChange,
           },
         }}>
 
