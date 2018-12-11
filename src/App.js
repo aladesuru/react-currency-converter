@@ -57,7 +57,7 @@ class App extends Component {
                         <select 
                           ref={select => this.leftSelectBoxValue=select} 
                           onClick={() => {context.actions.SelectBoxChange(this.leftSelectBoxValue.value , 0)}}
-                          onChange={() => {context.actions.liftUpSelectBoxValues(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}
+                          onChange={() => {context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}
                           >
                           {
                             context.exchangeRateInEuro.map((rate , index) => {
@@ -86,7 +86,7 @@ class App extends Component {
                           <select
                             ref={(select) => this.rightSelectBoxValue=select } 
                             onClick={() => {context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value)}}
-                            onChange={() => {context.actions.liftUpSelectBoxValues(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}>
+                            onChange={() => {context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}>
                             {
                               context.exchangeRateInEuro.map((rate , index) => {
                                 return (

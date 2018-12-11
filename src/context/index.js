@@ -13,10 +13,10 @@ export class Provider extends Component{
     rightCurrencyRate : 1,
   };
 
- getSelectBoxValues = (value1 , value2) => {
+ getSelectBoxValue = (leftSelectboxValue , rightSelectBoxValue) => {
     this.setState(
-      {leftCurrencyRate : parseFloat(value1 / value2).toFixed(4),
-        rightCurrencyRate : parseFloat(value2 / value1).toFixed(4),
+      {leftCurrencyRate : parseFloat(leftSelectboxValue / rightSelectBoxValue).toFixed(4),
+        rightCurrencyRate : parseFloat(rightSelectBoxValue / leftSelectboxValue).toFixed(4),
       })
   };
 
@@ -62,7 +62,7 @@ export class Provider extends Component{
 
           actions: {
             SelectBoxChange : this.changeCountryOnSelectBoxChange,
-            liftUpSelectBoxValues : this.getSelectBoxValues,
+            getSelectBoxValue : this.getSelectBoxValue,
           },
         }}>
 
