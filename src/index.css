@@ -73,7 +73,6 @@ form .connector span
 .container input,
 .container select
 {
-  height: 60px;
   width: 100%;
   border: none;
   outline: none;
@@ -92,6 +91,7 @@ form .connector span
 {
   background-color: #293451;
   color: #ddd;
+  height: 60px;
 }
 
 
