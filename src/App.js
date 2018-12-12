@@ -48,6 +48,7 @@ class App extends Component {
                         
                         <input type="text" 
                                 placeholder="type amount to convert here" 
+                                maxLength="11"
                                 ref={input => this.leftInput=input}
                                 onChange={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput)}}
                                 />
@@ -77,6 +78,7 @@ class App extends Component {
                             }
                           </select>
                           <input type="text" 
+                                  maxLength="11"
                                   placeholder="type amount to convert here" 
                                   ref={input => this.rightInput=input}
                                   onChange={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
