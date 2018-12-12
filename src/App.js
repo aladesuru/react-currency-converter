@@ -1,48 +1,13 @@
 import React, { Component } from 'react';
 import { Consumer } from './context'
-import './App.css';
-
-// import components
-// import LeftSelectBox from './components/LeftSelectBox.js';
-// import RightSelectBox from './components/RightSelectBox.js';
 
 import Divider from './components/Divider.js';
 
 
 class App extends Component {
 
- // state = {
- //  leftInputValue : "",
- //  rightInputValue : ""
- // }
-
- // leftInputChange = (e) => {
- //    if (!isNaN(e.target.value) && e.target.value !== "") {
- //        this.setState({
- //        rightInputValue : Number(this.leftCurrency * e.target.value).toFixed(2)
- //      })
- //      this.rightInput.value = this.state.rightInputValue;
- //    } 
- //    else {
- //      this.rightInput.value = "";
- //    }
- //    // console.log("right Input Value is :" , this.state.rightInputValue);
- // }
-
- // rightInputChange = (e) => {
- //    if (!isNaN(e.target.value) && e.target.value !== "") {
- //        this.setState({
- //        leftInputValue : Number(this.rightCurrency * e.target.value).toFixed(2)
- //      })
- //      this.leftInput.value = this.state.leftInputValue
- //    } 
- //    else {
- //        this.leftInput.value = "";
- //    }
- // }
-
  componentDidMount(){
-  this.getValue()
+  this.setInitValue()
  }
 
   render(){
@@ -52,10 +17,10 @@ class App extends Component {
         <Consumer>
           {
             context => {
-              // this.rightCurrency = context.rightCurrency
-              // this.leftCurrency = context.leftCurrency
-              this.getValue = () => {context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}
-              // this.rightValue = context.rightInputValue
+
+              this.setInitValue = () => {
+                context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)
+              }
 
               return (
                   <form>
@@ -64,9 +29,12 @@ class App extends Component {
                      <div  className="card">
                         <select 
                           ref={select => this.leftSelectBoxValue=select} 
-                          onClick={() => {context.actions.SelectBoxChange(this.leftSelectBoxValue.value , 0)}}
-                          onChange={() => {context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}
-                          >
+                          onChange={() => {
+                            context.actions.SelectBoxChange(
+                              this.leftSelectBoxValue.value , 0 ,this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value 
+                              )}
+                          }>
+
                           {
                             context.exchangeRateInEuro.map((rate , index) => {
                               return (
@@ -93,8 +61,11 @@ class App extends Component {
                        <div  className="card">
                           <select
                             ref={(select) => this.rightSelectBoxValue=select } 
-                            onClick={() => {context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value)}}
-                            onChange={() => {context.actions.getSelectBoxValue(this.leftSelectBoxValue.value , this.rightSelectBoxValue.value)}}>
+                            onChange={() => {
+                              context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value , this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value
+                                )}
+                            }>
+
                             {
                               context.exchangeRateInEuro.map((rate , index) => {
                                 return (
@@ -108,8 +79,7 @@ class App extends Component {
                           <input type="text" 
                                   placeholder="type amount to convert here" 
                                   ref={input => this.rightInput=input}
-                                  // value={context.rightInputValue}
-                                  // onChange={(e) => {context.actions.rightInputChange(e.target.value)}}
+                                  onChange={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
                                   />
                        </div>
                     </div>
