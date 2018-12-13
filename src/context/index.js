@@ -18,7 +18,7 @@ export class Provider extends Component{
   * method that gets select box values to determine cross rate
 */
  getSelectBoxValue = (leftSelectboxValue , rightSelectBoxValue) => {
-    this.setState((prevState) => {
+    this.setState(() => {
         return  {leftCurrencyCrossRate : parseFloat(leftSelectboxValue / rightSelectBoxValue).toFixed(4),
           rightCurrencyCrossRate : parseFloat(rightSelectBoxValue / leftSelectboxValue).toFixed(4),
         }
@@ -27,31 +27,32 @@ export class Provider extends Component{
   };
 
 /*
-  * cross coversion methods  
+  * methods that calculate amount to convert to using cross rate from getSelectBoxValue method 
 */
 
   leftInputChange = (leftInputValue , rightInputElement) => {
     if (!isNaN(leftInputValue) && leftInputValue !== "") {
-          rightInputElement.value = Number(this.state.leftCurrencyCrossRate * leftInputValue).toFixed(2)
+          rightInputElement.value = Number(this.state.leftCurrencyCrossRate * leftInputValue).toFixed(2);
     }else {
-        rightInputElement.value = ""
+        rightInputElement.value = "";
     } 
  };
 
  rightInputChange = (rightInputValue , leftInputElement) => {
     if (!isNaN(rightInputValue) && rightInputValue !== "") {
         
-       leftInputElement.value = Number(this.state.rightCurrencyCrossRate * rightInputValue).toFixed(2)
+       leftInputElement.value = Number(this.state.rightCurrencyCrossRate * rightInputValue).toFixed(2);
     } 
     else {
-      leftInputElement.value = ""
+      leftInputElement.value = "";
     }
  };
 
 /*
-  * changeCountryOnSelectBoxChange method is use to change both select box label  
+  * changeCountryOnSelectBoxChange method is use to change both select box label,
+  * call getSelectBoxValue, leftInputChange and rightInputchange methods 
 */
-  changeCountryOnSelectBoxChange = (leftOptText , rightOptText, leftSelectboxValue , rightSelectBoxValue) => {
+  changeCountryOnSelectBoxChange = (leftOptText,rightOptText,leftSelectboxValue,rightSelectBoxValue) => {
         var elId = 0;
       for (var i = 0; i < this.state.exchangeRate.length ; i++) {
         if (leftOptText && (parseFloat(this.state.exchangeRate[i].currency) ===  parseFloat(leftOptText))) {
@@ -67,6 +68,7 @@ export class Provider extends Component{
             leftCountry : prevState.exchangeRate[elId].country,
           }
         })
+        
       } 
       else if(rightOptText) {
         this.setState((prevState) => {
@@ -74,6 +76,7 @@ export class Provider extends Component{
             rightCountry : prevState.exchangeRate[elId].country,
           }
         })
+        
       }
 
       this.getSelectBoxValue(leftSelectboxValue , rightSelectBoxValue);

@@ -29,10 +29,10 @@ class App extends Component {
                      <div  className="card">
                         <select 
                           ref={select => this.leftSelectBoxValue=select} 
+                          onClick={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput )} }
                           onChange={() => {
-                            context.actions.SelectBoxChange(
-                              this.leftSelectBoxValue.value , 0 ,this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value 
-                              )}
+                            context.actions.SelectBoxChange(this.leftSelectBoxValue.value , 0 ,this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
+                            }
                           }>
 
                           {
@@ -50,7 +50,7 @@ class App extends Component {
                                 placeholder="type amount to convert here" 
                                 maxLength="11"
                                 ref={input => this.leftInput=input}
-                                onChange={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput)}}
+                                onChange={(e) => {context.actions.leftInputChange(e.target.value , this.rightInput)}}
                                 />
                      </div>
                    </div>
@@ -62,9 +62,10 @@ class App extends Component {
                        <div  className="card">
                           <select
                             ref={(select) => this.rightSelectBoxValue=select } 
+                            onClick={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
                             onChange={() => {
-                              context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value , this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value
-                                )}
+                              context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value , this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
+                              }
                             }>
 
                             {
@@ -81,7 +82,7 @@ class App extends Component {
                                   maxLength="11"
                                   placeholder="type amount to convert here" 
                                   ref={input => this.rightInput=input}
-                                  onChange={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
+                                  onChange={(e) => {context.actions.rightInputChange(e.target.value, this.leftInput)}}
                                   />
                        </div>
                     </div>
