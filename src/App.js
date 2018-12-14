@@ -32,6 +32,7 @@ class App extends Component {
                           onClick={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput )} }
                           onChange={() => {
                             context.actions.SelectBoxChange(this.leftSelectBoxValue.value , 0 ,this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
+                            context.actions.leftInputChange(this.leftInput.value , this.rightInput);
                             }
                           }>
 
@@ -65,6 +66,7 @@ class App extends Component {
                             onClick={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
                             onChange={() => {
                               context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value , this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
+                              context.actions.rightInputChange(this.rightInput.value , this.leftInput);
                               }
                             }>
 
