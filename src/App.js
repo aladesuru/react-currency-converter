@@ -29,6 +29,7 @@ class App extends Component {
                      <div  className="card">
                         <select 
                           ref={select => this.leftSelectBoxValue=select} 
+                          onTouchStart={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput )}}
                           onClick={() => {context.actions.leftInputChange(this.leftInput.value , this.rightInput )} }
                           onChange={() => {
                             context.actions.SelectBoxChange(this.leftSelectBoxValue.value , 0 ,this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
@@ -63,6 +64,7 @@ class App extends Component {
                        <div  className="card">
                           <select
                             ref={(select) => this.rightSelectBoxValue=select } 
+                            onTouchStart={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
                             onClick={() => {context.actions.rightInputChange(this.rightInput.value , this.leftInput)}}
                             onChange={() => {
                               context.actions.SelectBoxChange(0 , this.rightSelectBoxValue.value , this.leftSelectBoxValue.value ,this.rightSelectBoxValue.value);
