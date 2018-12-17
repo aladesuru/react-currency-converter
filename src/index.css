@@ -114,7 +114,7 @@ form .connector span
   }
 }
 
-@media all and (min-width: 769px)
+@media all and (min-width: 769px) and (orientation: landscape)
 {
   .container
   {
