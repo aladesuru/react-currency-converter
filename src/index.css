@@ -114,7 +114,11 @@ form .connector span
   }
 }
 
-@media all and (min-width: 769px) and (orientation: landscape)
+
+
+@media all and (min-width: 769px) ,
+only screen and (min-width: 600px) and (orientation: landscape) 
+
 {
   .container
   {
@@ -150,6 +154,23 @@ form .connector span
     font-size: 1.1em;
   }
 
+}
+
+@media only screen and (min-width: 600px) and (orientation: landscape){
+  .container{
+    margin-top: 40px;
+  }
+  .container input
+  {
+    font-size: .89em;
+  }
+
+  .container h1{
+    font-size: 1.2em;
+  }
+  .container .per-rate{
+    font-size: 1em;
+  }
 }
 
 @media all and (min-width: 990px)

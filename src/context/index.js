@@ -50,7 +50,7 @@ export class Provider extends Component{
 
 /*
   * changeCountryOnSelectBoxChange method is use to change both select box label,
-  * call getSelectBoxValue, leftInputChange and rightInputchange methods 
+  * call getSelectBoxValue 
 */
   changeCountryOnSelectBoxChange = (leftOptText,rightOptText,leftSelectboxValue,rightSelectBoxValue) => {
         var elId = 0;
